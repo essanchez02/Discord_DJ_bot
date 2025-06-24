@@ -72,4 +72,10 @@ async def play(ctx, url):
 
     await ctx.send(f'🎶 Now playing: **{info["title"]}**')
 
+@bot.command()
+async def linkspotify(ctx):
+    discord_id = str(ctx.author.id)
+    link_url = f"https://DJ-Bot-Spotify-Connection.up.railway.app/link?discord_id={discord_id}"
+    await ctx.send(f"Click to link your Spotify: {link_url}")
+
 bot.run(TOKEN)

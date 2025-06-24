@@ -21,11 +21,32 @@ def login():
     })
     return redirect(auth_url)
 
+@app.route("/link")
+def link():
+    discord_id = request.args.get("discord_id")
+
+    if not discord_id:
+        return "Missing Discord ID", 400
+
+    auth_url = "https://accounts.spotify.com/authorize?" + urlencode({
+        "client_id": SPOTIFY_CLIENT_ID,
+        "response_type": "code",
+        "redirect_uri": REDIRECT_URI,
+        "scope": SCOPES,
+        "state": discord_id  # <-- used later to link Spotify to Discord
+    })
+
+    return redirect(auth_url)
+
 @app.route("/callback")
 def callback():
     code = request.args.get("code")
+    discord_id = request.args.get("state")
+
     if not code:
         return "No code provided", 400
+    if not discord_id:
+        return "Missing Discord ID", 400
 
     token_url = "https://accounts.spotify.com/api/token"
     payload = {
@@ -41,4 +62,23 @@ def callback():
         return f"Failed to get token: {res.text}", 400
 
     tokens = res.json()
-    return jsonify(tokens)
+
+    # Save tokens to JSON file
+    import json
+    if os.path.exists("tokens.json"):
+        with open("tokens.json", "r") as f:
+            token_db = json.load(f)
+    else:
+        token_db = {}
+
+    token_db[discord_id] = {
+        "access_token": tokens["access_token"],
+        "refresh_token": tokens["refresh_token"],
+        "expires_in": tokens["expires_in"]
+    }
+
+    with open("tokens.json", "w") as f:
+        json.dump(token_db, f, indent=2)
+
+    return "Spotify account linked successfully! You can now use the bot."
+
