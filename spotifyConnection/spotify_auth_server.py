@@ -1,5 +1,6 @@
 from flask import Flask, redirect, request, jsonify
 import os
+import json
 import requests
 from urllib.parse import urlencode
 
@@ -58,9 +59,11 @@ def callback():
     tokens = res.json()
 
     # Save tokens to JSON file
-    import json
-    if os.path.exists("tokens.json"):
-        with open("tokens.json", "r") as f:
+    VOLUME_PATH = "/testVolume/tokens.json"
+
+    # Inside your callback function:
+    if os.path.exists(VOLUME_PATH):
+        with open(VOLUME_PATH, "r") as f:
             token_db = json.load(f)
     else:
         token_db = {}
@@ -71,20 +74,19 @@ def callback():
         "expires_in": tokens["expires_in"]
     }
 
-    with open("tokens.json", "w") as f:
+    with open(VOLUME_PATH, "w") as f:
         json.dump(token_db, f, indent=2)
 
     return "Spotify account linked successfully! You can now use the bot."
 
 #### FOR DEBUGGING ONLY: View stored tokens ####
-@app.route("/tokens")
-def view_tokens():
-    import json
-    if not os.path.exists("tokens.json"):
-        return "No tokens found", 404
-    with open("tokens.json", "r") as f:
-        return jsonify(json.load(f))
-
+# @app.route("/tokens")
+# def view_tokens():
+#     import json
+#     if not os.path.exists("tokens.json"):
+#         return "No tokens found", 404
+#     with open("tokens.json", "r") as f:
+#         return jsonify(json.load(f))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
