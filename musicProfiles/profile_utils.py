@@ -33,6 +33,17 @@ def get_or_create_profile(user):
     
     return profiles[user_key]
 
+def get_remote_token(discord_id):
+    url = f"https://discorddjbot-production.up.railway.app/get_token/{discord_id}"
+    res = requests.get(url)
+    if res.status_code != 200:
+        return None
+    return res.json()
+
+VOLUME_DIR = "/testVolume"
+TOKENS_FILE = os.path.join(VOLUME_DIR, "tokens.json")
+PROFILE_FILE = os.path.join(VOLUME_DIR, "profile.json")
+
 def get_top_tracks(access_token, limit=10):
     headers = {
         "Authorization": f"Bearer {access_token}"
@@ -58,7 +69,11 @@ def get_top_tracks(access_token, limit=10):
 
 def update_user_profile(discord_id):
     # Load tokens
-    with open("tokens.json", "r") as f:
+    if not os.path.exists(TOKENS_FILE):
+        print("No tokens.json found.")
+        return
+
+    with open(TOKENS_FILE, "r") as f:
         token_db = json.load(f)
 
     token_data = token_db.get(str(discord_id))
@@ -72,8 +87,8 @@ def update_user_profile(discord_id):
     top_tracks = get_top_tracks(access_token)
 
     # Load or create profile.json
-    if os.path.exists("profile.json"):
-        with open("profile.json", "r") as f:
+    if os.path.exists(PROFILE_FILE):
+        with open(PROFILE_FILE, "r") as f:
             profiles = json.load(f)
     else:
         profiles = {}
@@ -83,8 +98,8 @@ def update_user_profile(discord_id):
         "top_tracks": top_tracks
     }
 
-    with open("profile.json", "w") as f:
+    with open(PROFILE_FILE, "w") as f:
         json.dump(profiles, f, indent=2)
 
-    print(f"Updated profile for {discord_id}")
+    print(f"✅ Updated profile for {discord_id}")
 
