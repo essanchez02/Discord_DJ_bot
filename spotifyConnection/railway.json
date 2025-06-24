@@ -1,0 +1,9 @@
+{
+  "build": {
+    "env": {},
+    "commands": [
+      "pip install -r requirements.txt"
+    ]
+  },
+  "start": "python spotify_auth_server.py"
+}
