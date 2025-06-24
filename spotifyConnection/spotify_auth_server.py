@@ -11,16 +11,6 @@ REDIRECT_URI = os.environ.get("REDIRECT_URI")
 
 SCOPES = "user-read-private user-read-email user-read-recently-played user-top-read user-read-currently-playing"
 
-@app.route("/")
-def login():
-    auth_url = "https://accounts.spotify.com/authorize?" + urlencode({
-        "client_id": SPOTIFY_CLIENT_ID,
-        "response_type": "code",
-        "redirect_uri": REDIRECT_URI,
-        "scope": SCOPES,
-    })
-    return redirect(auth_url)
-
 @app.route("/link")
 def link():
     discord_id = request.args.get("discord_id")
@@ -82,3 +72,6 @@ def callback():
 
     return "Spotify account linked successfully! You can now use the bot."
 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
