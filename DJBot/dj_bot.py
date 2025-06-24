@@ -75,7 +75,13 @@ async def play(ctx, url):
 @bot.command()
 async def linkspotify(ctx):
     discord_id = str(ctx.author.id)
-    link_url = f"https://DJ-Bot-Spotify-Connection.up.railway.app/link?discord_id={discord_id}"
-    await ctx.send(f"Click to link your Spotify: {link_url}")
+    link_url = f"https://discorddjbot-production.up.railway.app/link?discord_id={discord_id}"
+
+    try:
+        await ctx.author.send(f"🎧 Click to link your Spotify account: {link_url}")
+        await ctx.send("✅ I've sent you a DM with your Spotify link!")
+    except discord.Forbidden:
+        await ctx.send("❌ I couldn't DM you! Please make sure your DMs are enabled.")
+
 
 bot.run(TOKEN)
