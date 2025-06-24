@@ -1,23 +1,77 @@
 {
-    "wheathin9852#0": {
-        "songs_played": 0,
-        "favorite_genres": [],
-        "liked_songs": [],
-        "recent_artists": [],
-        "joined": "2025-06-23T19:27:15.339752"
-    },
-    "snippycalderone#0": {
-        "songs_played": 0,
-        "favorite_genres": [],
-        "liked_songs": [],
-        "recent_artists": [],
-        "joined": "2025-06-23T19:48:22.030650"
-    },
-    "thegroovytaco#0": {
-        "songs_played": 0,
-        "favorite_genres": [],
-        "liked_songs": [],
-        "recent_artists": [],
-        "joined": "2025-06-23T21:38:40.696083"
-    }
+  "wheathin9852#0": {
+    "songs_played": 0,
+    "favorite_genres": [],
+    "liked_songs": [],
+    "recent_artists": [],
+    "joined": "2025-06-23T19:27:15.339752"
+  },
+  "snippycalderone#0": {
+    "songs_played": 0,
+    "favorite_genres": [],
+    "liked_songs": [],
+    "recent_artists": [],
+    "joined": "2025-06-23T19:48:22.030650"
+  },
+  "thegroovytaco#0": {
+    "songs_played": 0,
+    "favorite_genres": [],
+    "liked_songs": [],
+    "recent_artists": [],
+    "joined": "2025-06-23T21:38:40.696083"
+  },
+  "504471173569052672": {
+    "top_tracks": [
+      {
+        "name": "Foolen",
+        "artist": "Betty",
+        "uri": "spotify:track:1JaeammTToSEekxQrI6aqX"
+      },
+      {
+        "name": "darlin'",
+        "artist": "Faerybabyy",
+        "uri": "spotify:track:1dLDYx3k8eag4tE0ggbNCD"
+      },
+      {
+        "name": "Rain",
+        "artist": "Wunderhorse",
+        "uri": "spotify:track:62sHewU6Gfr2g3f7vRFZit"
+      },
+      {
+        "name": "orange soda",
+        "artist": "Faerybabyy",
+        "uri": "spotify:track:5O1YsYR7E1FNKlwogmY8Pk"
+      },
+      {
+        "name": "Wake",
+        "artist": "Triptides",
+        "uri": "spotify:track:1phxX6genVzHVcH3XGvHvP"
+      },
+      {
+        "name": "Skeleton",
+        "artist": "Bloc Party",
+        "uri": "spotify:track:147fFC2gtiRMw9KMmhxVgP"
+      },
+      {
+        "name": "get out of la",
+        "artist": "zzzahara",
+        "uri": "spotify:track:1UbLIl12r3Xf08KcwFE6TS"
+      },
+      {
+        "name": "Evil Eye",
+        "artist": "Pinkshift",
+        "uri": "spotify:track:3q13Ulh78cia6f9KgWpmUK"
+      },
+      {
+        "name": "Chaise Longue",
+        "artist": "Wet Leg",
+        "uri": "spotify:track:0nys6GusuHnjSYLW0PYYb7"
+      },
+      {
+        "name": "i'm gonna tell my therapist on you",
+        "artist": "Pinkshift",
+        "uri": "spotify:track:1iUBNLLmZnBAjgkHysEv37"
+      }
+    ]
+  }
 }

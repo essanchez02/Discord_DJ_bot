@@ -42,7 +42,8 @@ def get_remote_token(discord_id):
 
 VOLUME_DIR = "/testVolume"
 TOKENS_FILE = os.path.join(VOLUME_DIR, "tokens.json")
-PROFILE_FILE = os.path.join(VOLUME_DIR, "profile.json")
+PROFILE_FILE = "musicProfiles/profiles.json"
+
 
 def get_top_tracks(access_token, limit=10):
     headers = {
@@ -68,17 +69,9 @@ def get_top_tracks(access_token, limit=10):
 
 
 def update_user_profile(discord_id):
-    # Load tokens
-    if not os.path.exists(TOKENS_FILE):
-        print("No tokens.json found.")
-        return
-
-    with open(TOKENS_FILE, "r") as f:
-        token_db = json.load(f)
-
-    token_data = token_db.get(str(discord_id))
+    token_data = get_remote_token(discord_id)
     if not token_data:
-        print("No token found for this user.")
+        print("No token found for this user (via remote API).")
         return
 
     access_token = token_data["access_token"]
@@ -86,7 +79,7 @@ def update_user_profile(discord_id):
     # Fetch top tracks
     top_tracks = get_top_tracks(access_token)
 
-    # Load or create profile.json
+    # Load or create profile.json (local on your dev machine or another volume later)
     if os.path.exists(PROFILE_FILE):
         with open(PROFILE_FILE, "r") as f:
             profiles = json.load(f)
@@ -102,4 +95,5 @@ def update_user_profile(discord_id):
         json.dump(profiles, f, indent=2)
 
     print(f"✅ Updated profile for {discord_id}")
+
 
