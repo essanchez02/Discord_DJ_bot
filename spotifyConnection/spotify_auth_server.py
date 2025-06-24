@@ -87,6 +87,22 @@ def callback():
 #         return "No tokens found", 404
 #     with open("tokens.json", "r") as f:
 #         return jsonify(json.load(f))
+@app.route("/get_token/<discord_id>")
+def get_token(discord_id):
+    import json
+    VOLUME_PATH = "/testVolume/tokens.json"
+
+    if not os.path.exists(VOLUME_PATH):
+        return jsonify({"error": "no token file"}), 404
+
+    with open(VOLUME_PATH, "r") as f:
+        token_db = json.load(f)
+
+    if discord_id not in token_db:
+        return jsonify({"error": "no token for this user"}), 404
+
+    return jsonify(token_db[discord_id])
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
