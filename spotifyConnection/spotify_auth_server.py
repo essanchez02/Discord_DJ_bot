@@ -11,6 +11,10 @@ REDIRECT_URI = os.environ.get("REDIRECT_URI")
 
 SCOPES = "user-read-private user-read-email user-read-recently-played user-top-read user-read-currently-playing"
 
+@app.route("/")
+def home():
+    return "✅ Spotify OAuth server is running!"
+
 @app.route("/link")
 def link():
     discord_id = request.args.get("discord_id")
