@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import discord
 from discord.ext import commands
 import yt_dlp as youtube_dl
-from musicProfiles.profile_utils import get_or_create_profile
+from musicProfiles.profile_utils import get_or_create_profile, update_user_profile
 
 # ====================== Setup ======================
 # Load environment variables
