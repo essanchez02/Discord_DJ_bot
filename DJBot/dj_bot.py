@@ -71,7 +71,7 @@ async def play(ctx, url):
     ctx.voice_client.play(source, after=lambda e: print(f'Done: {e}'))
 
     await ctx.send(f'🎶 Now playing: **{info["title"]}**')
-
+### spotify stuff ###
 @bot.command()
 async def linkspotify(ctx):
     discord_id = str(ctx.author.id)
@@ -82,6 +82,17 @@ async def linkspotify(ctx):
         await ctx.send("✅ I've sent you a DM with your Spotify link!")
     except discord.Forbidden:
         await ctx.send("❌ I couldn't DM you! Please make sure your DMs are enabled.")
+
+@bot.command()
+async def updateprofile(ctx):
+    discord_id = str(ctx.author.id)
+    try:
+        update_user_profile(discord_id)
+        await ctx.send("✅ Your Spotify profile has been updated with your top tracks!")
+    except Exception as e:
+        print(e)
+        await ctx.send("❌ Failed to update your profile. Are you linked?")
+
 
 
 bot.run(TOKEN)

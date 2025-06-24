@@ -76,6 +76,16 @@ def callback():
 
     return "Spotify account linked successfully! You can now use the bot."
 
+#### FOR DEBUGGING ONLY: View stored tokens ####
+@app.route("/tokens")
+def view_tokens():
+    import json
+    if not os.path.exists("tokens.json"):
+        return "No tokens found", 404
+    with open("tokens.json", "r") as f:
+        return jsonify(json.load(f))
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
