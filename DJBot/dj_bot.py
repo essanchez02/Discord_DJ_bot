@@ -1,11 +1,14 @@
 import os
 from dotenv import load_dotenv
+
 import discord
 from discord.ext import commands
 import yt_dlp as youtube_dl
-from musicProfiles.profile_utils import get_or_create_profile, update_user_profile
 
-# ====================== Setup ======================
+from profile_utils import get_or_create_profile
+from spotify_utils import update_user_profile
+
+# =========================== Setup ===========================
 # Load environment variables
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -26,11 +29,12 @@ ffmpeg_options = {
     'options': '-vn'
 }
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-#====================== Discord Commands ======================
+# ======================= Discord Commands =======================
 @bot.event
 async def on_ready():
     print(f'✅ Bot is online as {bot.user}')
 
+##### JOIN #####
 @bot.command()
 async def join(ctx):
     # Check if the user is in a voice channel
@@ -47,6 +51,7 @@ async def join(ctx):
     else:
         await ctx.send("You need to be in a voice channel.")
 
+##### LEAVE #####
 @bot.command()
 async def leave(ctx):
     if ctx.voice_client:
@@ -54,6 +59,7 @@ async def leave(ctx):
     else:
         await ctx.send("I'm not in a voice channel.")
 
+##### PLAY #####
 @bot.command()
 async def play(ctx, url):
     # Join the voice channel if not already connected
@@ -71,7 +77,8 @@ async def play(ctx, url):
     ctx.voice_client.play(source, after=lambda e: print(f'Done: {e}'))
 
     await ctx.send(f'🎶 Now playing: **{info["title"]}**')
-#====================== spotify stuff ======================#
+# =========================== Spotify Stuff ===========================
+##### LINK SPOTIFY #####
 @bot.command()
 async def linkspotify(ctx):
     discord_id = str(ctx.author.id)
@@ -83,6 +90,7 @@ async def linkspotify(ctx):
     except discord.Forbidden:
         await ctx.send("❌ I couldn't DM you! Please make sure your DMs are enabled.")
 
+##### UPDATE PROFILE #####
 @bot.command()
 async def updateprofile(ctx):
     discord_id = str(ctx.author.id)
