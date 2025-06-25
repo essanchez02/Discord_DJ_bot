@@ -9,3 +9,4 @@ FFmpeg is required for audio playback.
     - Click "Edit the system environment variables"
     - Click "Environment Variables"
     - Under System variables, find Path → Edit → New → Add:  C:\ffmpeg\bin
+

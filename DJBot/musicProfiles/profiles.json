@@ -1,1 +1,14 @@
-{}
+{
+    "504471173569052672": {
+        "rated songs": [
+            {
+                "name": "fake name",
+                "artist": "fake artist",
+                "rating": 3,
+                "last played": "2025-06-24T21:56:24.099820",
+                "tags": []
+            }
+        ],
+        "joined": "2025-06-24T21:56:24.099820"
+    }
+}
